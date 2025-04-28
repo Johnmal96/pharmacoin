@@ -529,6 +529,93 @@
             height: 3px;
             background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
         }
+
+        /* Contract Address Container */
+        .contract-container {
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+        }
+        
+        .contract-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(255, 51, 153, 0.5);
+        }
+        
+        .contract-address-wrapper {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 51, 153, 0.2);
+        }
+        
+        .contract-address {
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            background: transparent;
+            border: none;
+            outline: none;
+            width: 80%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 0.5rem;
+        }
+        
+        .copy-btn {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, var(--primary-color), #ff0066);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .copy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 51, 153, 0.5);
+        }
+        
+        .copy-notification {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .copy-notification.show {
+            opacity: 1;
+        }
         
         /* Footer Section */
         .footer {
@@ -783,6 +870,11 @@
                 padding: 0.8rem 1.5rem;
                 font-size: 1.1rem;
             }
+
+            .contract-address {
+                font-size: 1rem;
+                width: 70%;
+            }
         }
         
         /* Dark mode preference detection */
@@ -882,6 +974,14 @@
             <iframe src="https://dexscreener.com/solana/3PffTrmfWe23GTNH6XNERGzzUkLDiPTejJpH9DK3R28u?embed=1&loadChartSettings=0&trades=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
           </div>
       </section>
+
+      <section id="contract-address" class="contract-container">
+        <h2 class="contract-title">Contract Address</h2>
+        <div class="contract-address-wrapper">
+            <input type="text" class="contract-address" value="HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump" readonly />
+            <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
+        </div>
+    </section>
       
       <!-- Footer -->
       <footer class="footer">
@@ -896,12 +996,6 @@
                   <img src="pharmacoin_logo.png" alt="$PHARMA" width="40px" />
                   <!-- Animated SVG Logo -->
                   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                      <!-- <ellipse cx="50" cy="50" rx="45" ry="22" fill="url(#pill-gradient)" stroke="#0a0a0a" stroke-width="1.5">
-                          <animate attributeName="ry" values="22;20;22" dur="3s" repeatCount="indefinite" />
-                      </ellipse>
-                      <line x1="25" y1="50" x2="75" y2="50" stroke="#0a0a0a" stroke-width="1.5" stroke-dasharray="3,3" />
-                      <text x="33" y="45" fill="#0a0a0a" font-family="'VT323', monospace" font-size="10" font-weight="bold">$PHARMA</text>
-                      <text x="27" y="58" fill="#0a0a0a" font-family="'VT323', monospace" font-size="7">F*CK BIG PHARMA</text> -->
                       <defs>
                           <linearGradient id="pill-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                               <stop offset="0%" stop-color="#ff3399" />
@@ -1089,6 +1183,25 @@
               
               preloadImages();
           });
+
+          function copyToClipboard() {
+            const contractAddress = document.querySelector('.contract-address');
+            contractAddress.select();
+            contractAddress.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            
+            // Show notification
+            const notification = document.createElement('div');
+            notification.classList.add('copy-notification', 'show');
+            notification.textContent = 'Contract Address Copied!';
+            document.body.appendChild(notification);
+            
+            // Remove notification after 2 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                document.body.removeChild(notification);
+            }, 2000);
+        }
       </script>
   </body>
   </html>
