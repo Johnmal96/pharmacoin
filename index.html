@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$PHARMA - The People's Medicine</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'VT323', monospace;
+        }
+        
+        body {
+          background-color: #2c3e50; /* Navy Blue */
+            color: #dddddd;
+            overflow-x: hidden;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300ff66' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glitch-container {
+            position: relative;
+        }
+        
+        .glitch {
+            font-size: 5rem;
+            font-weight: bold;
+            text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.05em -0.025em 0 rgba(0,255,0,0.75), 0.025em 0.05em 0 rgba(0,0,255,0.75);
+            animation: glitch 1s infinite;
+        }
+        
+        @keyframes glitch {
+            0% {
+                text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.05em -0.025em 0 rgba(0,255,0,0.75), 0.025em 0.05em 0 rgba(0,0,255,0.75);
+            }
+            15% {
+                text-shadow: -0.05em -0.025em 0 rgba(255,0,0,0.75), 0.025em 0.025em 0 rgba(0,255,0,0.75), -0.05em -0.05em 0 rgba(0,0,255,0.75);
+            }
+            50% {
+                text-shadow: 0.025em 0.05em 0 rgba(255,0,0,0.75), 0.05em 0 0 rgba(0,255,0,0.75), 0 -0.05em 0 rgba(0,0,255,0.75);
+            }
+            100% {
+                text-shadow: -0.025em 0 0 rgba(255,0,0,0.75), -0.025em -0.025em 0 rgba(0,255,0,0.75), -0.025em -0.05em 0 rgba(0,0,255,0.75);
+            }
+        }
+        
+        .subtitle {
+            font-size: 2rem;
+            margin-top: 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
+        }
+        
+        .pill-image {
+            width: 300px;
+            height: 300px;
+            margin: 2rem 0;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: all 0.3s;
+            background-color: #ff3399;
+            color: #0a0a0a;
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.5);
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.8);
+        }
+        
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            font-size: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .facts-container {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #ff3399;
+            margin: 4rem 0;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+        }
+        
+        .facts-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .fact-item {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: rgba(0, 255, 102, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .fact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 102, 0.3);
+        }
+        
+        .fact-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .fact-item p {
+            font-size: 1.3rem;
+            line-height: 1.5;
+        }
+        
+        /* DEXScreener Embed */
+        #dexscreener-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 125%;
+            margin: 2rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+            border: 2px solid #ff3399;
+        }
+        
+        @media(min-width: 1400px) {
+            #dexscreener-embed {
+                padding-bottom: 65%;
+            }
+        }
+        
+        #dexscreener-embed iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border: 0;
+        }
+        
+        .chart-section {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .chart-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.8);
+            margin-top: 4rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: #ff3399;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
+        }
+        
+        .copyright {
+            font-size: 1.2rem;
+            color: #ff3399;
+        }
+        
+        .ticker-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            overflow: hidden;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            padding: 1rem 0;
+            z-index: 100;
+        }
+        
+        .ticker {
+            white-space: nowrap;
+            display: inline-block;
+            animation: ticker 30s linear infinite;
+            font-size: 1.5rem;
+        }
+        
+        @keyframes ticker {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        /* Pills animation */
+        .pill-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .pill {
+            position: absolute;
+            width: 40px;
+            height: 15px;
+            border-radius: 10px;
+            opacity: 0.4;
+            animation: pillFall 15s linear infinite;
+        }
+        
+        @keyframes pillFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .glitch {
+                font-size: 3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .pill-image {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .about-title {
+                font-size: 2.5rem;
+            }
+            
+            .about-text {
+                font-size: 1.3rem;
+            }
+            
+            .fact-item h3 {
+                font-size: 1.5rem;
+            }
+            
+            .fact-item p {
+                font-size: 1.2rem;
+            }
+            
+            .chart-title {
+                font-size: 2.5rem;
+            }
+            
+            .social-links {
+                gap: 1rem;
+            }
+            
+            .social-links a {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Pill Rain -->
+    <div class="pill-rain" id="pillRain"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="glitch-container">
+            <h1 class="glitch">$PHARMA</h1>
+        </div>
+        <p class="subtitle">Did you know big pharma kicks a million babies per year, and then takes their puppies and throws their ice cream on the ground?</p>
+        
+        <div class="pill-image">
+            <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="50" rx="90" ry="40" fill="#ff3399" stroke="#0a0a0a" stroke-width="2" />
+                <line x1="50" y1="50" x2="150" y2="50" stroke="#0a0a0a" stroke-width="2" stroke-dasharray="5,5" />
+                <text x="65" y="40" fill="#0a0a0a" font-family="'VT323', monospace" font-size="14" font-weight="bold">$PHARMA</text>
+                <text x="65" y="65" fill="#0a0a0a" font-family="'VT323', monospace" font-size="10">F*UCK BIG PHARMA</text>
+            </svg>
+        </div>
+        
+        <div class="buttons">
+            <a href="https://pump.fun/coin/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump" class="btn">Buy Now</a>
+            <a href="https://x.com/i/communities/1915908948546199854" class="btn">Join Community</a>
+        </div>
+    </header>
+    
+    <!-- About -->
+    <section id="about">
+        <h2 class="about-title">WHY $PHARMA?</h2>
+        <div class="about-content">
+            <div class="about-text">
+              <p>This is potentially the single greatest movement people have been rallying behind. This isn’t just a future 10m mc runner (higher). This is something the people relate to. Big pharma farms billions out of our pockets yearly. This is just a domino leading toward a sonic boom. During this process why don’t we PVE until we never have to worry about going into a financial spiral ever again whenever a health issue comes up. Let’s all come together and make a stand against this bullshit ass monopoly that’s stacked against us as a people.</p>
+                <!-- <p>$PHARMA is more than just a meme coin. It's a statement. A revolution against big pharma monopolies who profit from people's suffering.</p>
+                <br>
+                <p>While they charge $1000 for insulin, we're building a community-driven alternative to the corrupt system.</p>
+                <br>
+                <p>Our mission: Flip the script. Return power to the people. Make medicine accessible again.</p> -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Big Pharma Facts -->
+    <section id="facts">
+        <div class="facts-container">
+            <h2>BIG PHARMA FACTS</h2>
+            <div class="facts-grid">
+                <div class="fact-item">
+                    <h3>Price Gouging</h3>
+                    <p>In the U.S., insulin costs 5-10x more than in other developed countries. The same vial that costs $300+ in America costs just $30 in Canada.</p>
+                </div>
+                <div class="fact-item">
+                    <h3>Patent Manipulation</h3>
+                    <p>Big pharma companies extend patents through "evergreening" - making minor modifications to existing drugs to maintain monopolies and prevent affordable generics.</p>
+                </div>
+                <div class="fact-item">
+                    <h3>Executive Compensation</h3>
+                    <p>In 2023, the average Big Pharma CEO made over $22 million while patients struggle to afford life-saving medications.</p>
+                </div>
+                <div class="fact-item">
+                    <h3>Marketing vs. Research</h3>
+                    <p>Major pharmaceutical companies spend 2-3x more on marketing than on research and development of new treatments.</p>
+                </div>
+                <div class="fact-item">
+                    <h3>Medical Bankruptcy</h3>
+                    <p>Nearly 60% of all bankruptcies in the U.S. are related to medical expenses, with prescription drug costs being a major contributor.</p>
+                </div>
+                <div class="fact-item">
+                    <h3>Global Access</h3>
+                    <p>One-third of the world's population lacks access to essential medicines, while pharmaceutical companies maintain profit margins of 15-30%.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- DEXScreener Chart Section -->
+    <section id="chart" class="chart-section">
+        <h2 class="chart-title">LIVE CHART</h2>
+        <div id="dexscreener-embed">
+            <iframe src="https://dexscreener.com/solana/3PffTrmfWe23GTNH6XNERGzzUkLDiPTejJpH9DK3R28u?embed=1&loadChartSettings=0&trades=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://x.com/i/communities/1915908948546199854">Twitter</a>
+            <a href="#">Telegram</a>
+            <a href="#">Discord</a>
+            <a href="#">Reddit</a>
+        </div>
+        <p class="copyright">© 2025 $PHARMA - The People's Medicine. All rights reserved.</p>
+    </footer>
+    
+    <!-- Ticker -->
+    <div class="ticker-container">
+        <div class="ticker">
+            $PHARMA — FUCK BIG PHARMA — PHARMACOIN - FUCK BIG PHARMA - $PHARMA — FUCK BIG PHARMA — PHARMACOIN — FUCK BIG PHARMA — $PHARMA — FUCK BIG PHARMA — PHARMACOIN — FUCK BIG PHARMA — $PHARMA — FUCK BIG PHARMA — PHARMACOIN - FUCK BIG PHARMA
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script>
+        // Colorful Pill Rain
+        const pillRain = document.getElementById('pillRain');
+        const pillCount = 30;
+        const pillColors = [
+            '#ff3399', // pink
+            '#33ccff', // light blue
+            '#ffcc00', // yellow
+            '#ff6600', // orange
+            '#cc66ff', // purple
+            '#66ff66', // light green
+            '#ff0000', // red
+            '#0099ff', // blue
+            '#ff9900'  // amber
+        ];
+        
+        function createPills() {
+            for (let i = 0; i < pillCount; i++) {
+                const pill = document.createElement('div');
+                pill.classList.add('pill');
+                
+                // Random position, delay, and color
+                const left = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = 10 + Math.random() * 20;
+                const size = 10 + Math.random() * 30;
+                const colorIndex = Math.floor(Math.random() * pillColors.length);
+                
+                pill.style.left = left + 'vw';
+                pill.style.width = size + 'px';
+                pill.style.height = size / 2 + 'px';
+                pill.style.animationDelay = delay + 's';
+                pill.style.animationDuration = duration + 's';
+                pill.style.backgroundColor = pillColors[colorIndex];
+                
+                pillRain.appendChild(pill);
+            }
+        }
+        
+        createPills();
+        
+        // Responsive
+        window.addEventListener('resize', function() {
+            // Maintain responsiveness without the canvas
+        });
+    </script>
+</body>
+</html>
