@@ -76,6 +76,44 @@
             background: linear-gradient(135deg, rgba(26, 37, 55, 0.9), rgba(20, 30, 48, 0.95));
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
+
+         .header-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            position: relative;
+            filter: drop-shadow(0 0 10px rgba(255, 51, 153, 0.7));
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        .header-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        @keyframes pulse-glow {
+            0% {
+                filter: drop-shadow(0 0 8px rgba(255, 51, 153, 0.7));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 15px rgba(0, 255, 102, 0.8));
+                transform: scale(1.05);
+            }
+            100% {
+                filter: drop-shadow(0 0 8px rgba(255, 51, 153, 0.7));
+                transform: scale(1);
+            }
+        }
+        
+        /* Responsive styles for the logo */
+        @media (max-width: 768px) {
+            .header-logo {
+                width: 90px;
+                height: 90px;
+            }
+        }
         
         .glitch-container {
             position: relative;
@@ -561,9 +599,11 @@
             margin-top: 2rem;
         }
         
-        .logo-container {
-            width: 50px;
-            height: 50px;
+        .logo-container img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            margin-bottom: 5px;
         }
         
         .copyright {
@@ -764,10 +804,13 @@
     
     <!-- Header Section -->
     <header>
+        <div class="header-logo">
+            <img src="pharmacoin_logo.png" alt="$PHARMA Logo">
+        </div>
         <div class="glitch-container">
             <h1 class="glitch">$PHARMA</h1>
         </div>
-        <p class="subtitle">Did you know big pharma kicks 1.2 million babies per year, and then takes their puppies and throws their ice cream on the ground?</p>
+        <p class="subtitle">OUR HEALTH. THEIR WEALTH. NO MORE.</p>
         
         <!-- 3D Pill Design -->
         <div class="pill-container">
@@ -796,7 +839,7 @@
         <div class="about-content">
             <div class="about-text">
                 <p>
-                  This could be the most significant movement people have ever rallied behind. It’s about something that truly resonates with the people. Big Pharma farms billions from us each year. This is just the first step toward something much larger. Let’s unite and take a stand against this corrupt monopoly that works against us all.
+                    Big Pharma’s out here charging $500 for a pill, yeeting your grandma’s savings into a black hole, and probably stealing your dog’s treats. Meanwhile, they’re popping champagne and laughing at all of us. It’s time to flip the script. Join the movement — a bunch of regular, pissed-off people who are tired of being told a single pill costs more than their rent. Big Pharma thought they could keep yeeting our wallets into a black hole forever. Nah. We’re here to meme, to rally, to laugh, and to build something so loud even their offshore accounts will hear us.
                 </p>
             </div>
         </div>
@@ -845,39 +888,33 @@
       
       <!-- Footer -->
       <footer class="footer">
-          <div class="social-links">
-              <a href="https://x.com/PharmaCoinSol">Twitter</a>
-              <a href="https://pump.fun/coin/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">PumpFun</a>
-              <a href="https://dexscreener.com/solana/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">DexScreener</a>
-              <a href="https://www.geckoterminal.com/solana/pools/3PffTrmfWe23GTNH6XNERGzzUkLDiPTejJpH9DK3R28u?utm_source=coingecko&utm_medium=referral&utm_campaign=searchresults">Geckoterminal</a>
-          </div>
-          <div class="logo-text-container">
-              <div class="logo-container">
-                  <img src="pharmacoin_logo.png" alt="$PHARMA" width="40px" />
-                  <!-- Animated SVG Logo -->
-                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                      <!-- <ellipse cx="50" cy="50" rx="45" ry="22" fill="url(#pill-gradient)" stroke="#0a0a0a" stroke-width="1.5">
-                          <animate attributeName="ry" values="22;20;22" dur="3s" repeatCount="indefinite" />
-                      </ellipse>
-                      <line x1="25" y1="50" x2="75" y2="50" stroke="#0a0a0a" stroke-width="1.5" stroke-dasharray="3,3" />
-                      <text x="33" y="45" fill="#0a0a0a" font-family="'VT323', monospace" font-size="10" font-weight="bold">$PHARMA</text>
-                      <text x="27" y="58" fill="#0a0a0a" font-family="'VT323', monospace" font-size="7">F*CK BIG PHARMA</text> -->
-                      <defs>
-                          <linearGradient id="pill-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                              <stop offset="0%" stop-color="#ff3399" />
-                              <stop offset="100%" stop-color="#ff80bf" />
-                              <animate attributeName="x1" values="0%;100%;0%" dur="5s" repeatCount="indefinite" />
-                              <animate attributeName="y1" values="0%;100%;0%" dur="7s" repeatCount="indefinite" />
-                          </linearGradient>
-                      </defs>
-                  </svg>
-              </div>
-              <div>
-                  <p class="copyright">© 2025 $PHARMA - F*ck Big Pharma. All rights reserved.</p>
-                  <p class="disclaimer">DISCLAIMER: None of the content on this website is financial advice. DYOR.</p>
-              </div>
-          </div>
-      </footer>
+        <div class="social-links">
+            <a href="https://x.com/PharmaCoinSol">Twitter</a>
+            <a href="https://pump.fun/coin/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">PumpFun</a>
+            <a href="https://dexscreener.com/solana/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">DexScreener</a>
+            <a href="https://www.geckoterminal.com/solana/pools/3PffTrmfWe23GTNH6XNERGzzUkLDiPTejJpH9DK3R28u?utm_source=coingecko&utm_medium=referral&utm_campaign=searchresults">Geckoterminal</a>
+        </div>
+        <div class="logo-text-container">
+            <div class="logo-container">
+                <img src="pharmacoin_logo.png" alt="$PHARMA" />
+                <!-- SVG animation can remain -->
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="pill-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ff3399" />
+                            <stop offset="100%" stop-color="#ff80bf" />
+                            <animate attributeName="x1" values="0%;100%;0%" dur="5s" repeatCount="indefinite" />
+                            <animate attributeName="y1" values="0%;100%;0%" dur="7s" repeatCount="indefinite" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <div>
+                <p class="copyright">© 2025 $PHARMA - F*ck Big Pharma. All rights reserved.</p>
+                <p class="disclaimer">DISCLAIMER: None of the content on this website is financial advice. DYOR.</p>
+            </div>
+        </div>
+    </footer>
       
       <!-- Ticker -->
       <div class="ticker-container">
