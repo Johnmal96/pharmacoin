@@ -351,27 +351,27 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            padding: 0 1rem; /* Add some padding to avoid the boxes touching the edges */
+            /* padding: 0 1rem; Add some padding to avoid the boxes touching the edges */
         }
 
-/* Ensure the fact items don't overflow */
-.fact-item {
-    background: linear-gradient(135deg, rgba(0, 255, 102, 0.05), rgba(0, 255, 102, 0.1));
-    border-radius: 15px;
-    padding: 1.8rem;
-    border: 1px solid rgba(0, 255, 102, 0.2);
-    transition: all 0.4s;
-    position: relative;
-    overflow: hidden;
-    word-wrap: break-word; /* Ensure content wraps correctly inside the fact items */
-}
+        /* Ensure the fact items don't overflow */
+        .fact-item {
+            background: linear-gradient(135deg, rgba(0, 255, 102, 0.05), rgba(0, 255, 102, 0.1));
+            border-radius: 15px;
+            padding: 1.8rem;
+            border: 1px solid rgba(0, 255, 102, 0.2);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            word-wrap: break-word; /* Ensure content wraps correctly inside the fact items */
+        }
 
-/* Adjust for smaller mobile screens */
-@media (max-width: 768px) {
-    .facts-grid {
-        grid-template-columns: 1fr; /* Stacks the facts items vertically */
-    }
-}
+        /* Adjust for smaller mobile screens */
+        @media (max-width: 768px) {
+            .facts-grid {
+                grid-template-columns: 1fr; /* Stacks the facts items vertically */
+            }
+        }
         
         .fact-item:hover {
             transform: translateY(-8px);
