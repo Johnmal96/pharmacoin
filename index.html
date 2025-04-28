@@ -20,6 +20,16 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
         
+        :root {
+            --primary-color: #ff3399;
+            --secondary-color: #00ff66;
+            --bg-color: #1a2537;
+            --text-color: #f0f0f0;
+            --dark-overlay: rgba(0, 0, 0, 0.7);
+            --card-bg: rgba(0, 0, 0, 0.5);
+            --highlight-shadow: 0 0 15px rgba(0, 255, 102, 0.5);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -28,12 +38,31 @@
         }
         
         body {
-          background-color: #2c3e50; /* Navy Blue */
-            color: #dddddd;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             overflow-x: hidden;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300ff66' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
         
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark-overlay);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff6bb2;
+        }
+        
+        /* Header Section */
         header {
             height: 100vh;
             display: flex;
@@ -44,17 +73,21 @@
             padding: 2rem;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, rgba(26, 37, 55, 0.9), rgba(20, 30, 48, 0.95));
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .glitch-container {
             position: relative;
+            margin-bottom: 0.5rem;
         }
         
         .glitch {
-            font-size: 5rem;
+            font-size: 5.5rem;
             font-weight: bold;
             text-shadow: 0.05em 0 0 rgba(255,0,0,0.75), -0.05em -0.025em 0 rgba(0,255,0,0.75), 0.025em 0.05em 0 rgba(0,0,255,0.75);
             animation: glitch 1s infinite;
+            letter-spacing: 0.1em;
         }
         
         @keyframes glitch {
@@ -73,17 +106,26 @@
         }
         
         .subtitle {
-            font-size: 2rem;
-            margin-top: 1rem;
+            font-size: 1.8rem;
+            margin: 1rem auto;
+            max-width: 800px;
             text-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
+            line-height: 1.4;
+            padding: 0 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 51, 153, 0.3);
         }
         
-        .pill-image {
-            width: 300px;
-            height: 300px;
+        /* Realistic 3D Pill */
+        .pill-container {
             margin: 2rem 0;
             position: relative;
-            animation: float 3s ease-in-out infinite;
+            width: 300px;
+            height: 120px;
+            perspective: 1000px;
+            animation: float 4s ease-in-out infinite;
         }
         
         @keyframes float {
@@ -91,52 +133,162 @@
                 transform: translateY(0px) rotate(0deg);
             }
             50% {
-                transform: translateY(-20px) rotate(5deg);
+                transform: translateY(-20px) rotate(3deg);
             }
             100% {
                 transform: translateY(0px) rotate(0deg);
             }
         }
         
+        .pill-3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotateY(0); }
+            100% { transform: rotateY(360deg); }
+        }
+        
+        .pill-half {
+            position: absolute;
+            width: 150px;
+            height: 60px;
+            top: 50%;
+            margin-top: -30px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #0a0a0a;
+            box-shadow: 0 0 20px rgba(255, 51, 153, 0.7);
+            overflow: hidden;
+        }
+        
+        .pill-left {
+            left: 0;
+            background: linear-gradient(135deg, #3352ff, #668aff);
+            transform-origin: right center;
+            transform: rotateY(0deg);
+        }
+        
+        .pill-right {
+            left: 150px;
+            background: linear-gradient(135deg, #f50909, #fc4646);
+            transform-origin: left center;
+            transform: rotateY(0deg);
+        }
+        
+        .pill-line {
+            position: absolute;
+            width: 4px;
+            height: 60px;
+            background-color: rgba(10, 10, 10, 0.3);
+            left: 150px;
+            top: 50%;
+            margin-top: -30px;
+            transform: translateX(-2px);
+            z-index: 10;
+        }
+        
+        .pill-text {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .pill-shine {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            width: 90%;
+            height: 20%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.5), rgba(255,255,255,0.1));
+            border-radius: 50%;
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+        
+        /* Button styles */
         .buttons {
             display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
             flex-wrap: wrap;
             justify-content: center;
         }
         
         .btn {
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 8px;
-            font-size: 1.2rem;
+            border-radius: 30px;
+            font-size: 1.3rem;
             cursor: pointer;
             text-transform: uppercase;
             font-weight: bold;
             transition: all 0.3s;
-            background-color: #ff3399;
-            color: #0a0a0a;
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.5);
+            background: linear-gradient(135deg, #ff3399, #ff0066);
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 51, 153, 0.5);
             text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+            z-index: -1;
         }
         
         .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(0, 255, 102, 0.8);
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 7px 25px rgba(255, 51, 153, 0.7);
         }
         
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        /* About section */
         section {
-            padding: 4rem 2rem;
+            padding: 5rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
         
         .about-title {
-            font-size: 3rem;
-            margin-bottom: 2rem;
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
             text-align: center;
             text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
         }
         
         .about-content {
@@ -152,21 +304,47 @@
             min-width: 300px;
             font-size: 1.5rem;
             line-height: 1.6;
-        }
-        
-        .facts-container {
-            background-color: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.3);
             padding: 2rem;
             border-radius: 15px;
-            border: 2px solid #ff3399;
-            margin: 4rem 0;
-            box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 51, 153, 0.2);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .about-text:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Facts container */
+        .facts-container {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 2px solid var(--primary-color);
+            margin: 5rem 0;
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.2);
         }
         
         .facts-container h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 3rem;
+            margin-bottom: 2rem;
             text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .facts-container h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
         }
         
         .facts-grid {
@@ -175,31 +353,43 @@
             gap: 2rem;
         }
 
-        /* Adjust the grid for smaller screens */
-        @media (max-width: 768px) {
-            .facts-grid {
-                grid-template-columns: 1fr; /* Ensure each fact item takes up full width */
-                gap: 1rem; /* Reduce gap on mobile */
-            }
-        }
-
         .fact-item {
             text-align: center;
-            padding: 1.5rem;
-            background-color: rgba(0, 255, 102, 0.1);
-            border-radius: 10px;
-            transition: all 0.3s;
-            box-sizing: border-box;
+            padding: 1.8rem;
+            background: linear-gradient(135deg, rgba(0, 255, 102, 0.05), rgba(0, 255, 102, 0.1));
+            border-radius: 15px;
+            transition: all 0.4s;
+            border: 1px solid rgba(0, 255, 102, 0.2);
+            position: relative;
+            overflow: hidden;
         }
         
         .fact-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 255, 102, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 255, 102, 0.3);
+            border-color: rgba(0, 255, 102, 0.5);
+        }
+        
+        .fact-item:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 51, 153, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .fact-item:hover:before {
+            opacity: 1;
         }
         
         .fact-item h3 {
             font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
         }
         
         .fact-item p {
@@ -207,7 +397,7 @@
             line-height: 1.5;
         }
         
-        /* DEXScreener Embed */
+        /* DEXScreener Chart */
         #dexscreener-embed {
             position: relative;
             width: 100%;
@@ -215,41 +405,43 @@
             margin: 2rem 0;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
-            border: 2px solid #ff3399;
-        }
-
-        /* Base padding for mobile devices (iPhone) */
-        #dexscreener-embed {
-            padding-bottom: 150%; /* Taller aspect ratio for small screens */
+            box-shadow: 0 0 30px rgba(0, 255, 102, 0.3);
+            border: 2px solid var(--primary-color);
+            transition: all 0.3s ease;
         }
         
-       /* Tablet size adjustments */
+        #dexscreener-embed:hover {
+            box-shadow: 0 0 40px rgba(0, 255, 102, 0.5);
+        }
+
+        /* Base padding for mobile devices */
+        #dexscreener-embed {
+            padding-bottom: 150%;
+        }
+        
+        /* Responsive chart container */
         @media (min-width: 768px) {
             #dexscreener-embed {
-                padding-bottom: 100%; /* More balanced for medium screens */
+                padding-bottom: 100%;
             }
         }
 
-        /* Laptops & smaller desktops (MacBook, etc) */
         @media (min-width: 1024px) {
             #dexscreener-embed {
-                padding-bottom: 75%; /* Wider aspect ratio */
+                padding-bottom: 75%;
             }
         }
 
-        /* Medium desktops (21-24 inch) */
         @media (min-width: 1400px) {
             #dexscreener-embed {
-                padding-bottom: 56.25%; /* 16:9 aspect ratio */
+                padding-bottom: 56.25%;
             }
         }
 
-        /* Large displays (28-32 inch) */
         @media (min-width: 1800px) {
             #dexscreener-embed {
-                padding-bottom: 50%; /* Even wider aspect ratio for large screens */
-                max-width: 1600px; /* Prevent excessive stretching */
+                padding-bottom: 50%;
+                max-width: 1600px;
                 margin-left: auto;
                 margin-right: auto;
             }
@@ -265,69 +457,120 @@
         }
         
         .chart-section {
-            padding: 2rem;
+            padding: 3rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
         
         .chart-title {
-            font-size: 3rem;
-            margin-bottom: 2rem;
+            font-size: 3.5rem;
+            margin-bottom: 2.5rem;
             text-align: center;
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+            text-shadow: 0 0 15px rgba(0, 255, 102, 0.5);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
         
+        .chart-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+        
+        /* Footer Section */
         .footer {
             text-align: center;
-            padding: 2rem;
-            background-color: rgba(0, 0, 0, 0.8);
-            margin-top: 4rem;
-            padding-bottom: 4rem;
+            padding: 3rem 2rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7));
+            margin-top: 5rem;
+            padding-bottom: 5rem;
+            position: relative;
+        }
+        
+        .footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
         }
         
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
+            gap: 2rem;
+            margin: 2rem 0;
             flex-wrap: wrap;
         }
         
         .social-links a {
-            color: #ff3399;
+            color: var(--primary-color);
             font-size: 1.8rem;
             transition: all 0.3s;
             white-space: nowrap;
+            position: relative;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.3);
         }
         
         .social-links a:hover {
             transform: translateY(-5px);
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
+            text-shadow: 0 0 10px rgba(255, 51, 153, 0.8);
+            background: rgba(0, 0, 0, 0.5);
         }
         
-        @media (max-width: 768px) {
-            .social-links {
-                gap: 1rem; /* Reduce the gap on smaller screens */
-            }
-
-            .social-links a {
-                font-size: 1.5rem; /* Reduce the font size for smaller screens */
-            }
+        .social-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
         }
-
+        
+        .social-links a:hover:after {
+            width: 100%;
+        }
+        
         .logo-text-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 15px;
+            margin-top: 2rem;
         }
-
+        
+        .logo-container {
+            width: 50px;
+            height: 50px;
+        }
+        
         .copyright {
             margin: 0;
             font-size: 1.2rem;
-            color: #ff3399;
+            color: var(--primary-color);
+            line-height: 1.6;
         }
         
+        .disclaimer {
+            margin-top: 1rem;
+            font-style: italic;
+            opacity: 0.8;
+        }
+        
+        /* Animated Ticker */
         .ticker-container {
             background-color: rgba(0, 0, 0, 0.8);
             width: 100%;
@@ -337,6 +580,8 @@
             left: 0;
             padding: 1rem 0;
             z-index: 100;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 51, 153, 0.3);
         }
         
         .ticker {
@@ -344,6 +589,8 @@
             display: inline-block;
             animation: ticker 30s linear infinite;
             font-size: 1.5rem;
+            color: rgb(255, 255, 255);
+            text-shadow: 0 0 5px rgba(255, 51, 153, 0.5);
         }
         
         @keyframes ticker {
@@ -355,7 +602,7 @@
             }
         }
         
-        /* Pills animation */
+        /* Pill Rain Animation */
         .pill-rain {
             position: fixed;
             top: 0;
@@ -369,11 +616,10 @@
         
         .pill {
             position: absolute;
-            width: 40px;
-            height: 15px;
-            border-radius: 10px;
+            border-radius: 50px;
             opacity: 0.4;
             animation: pillFall 15s linear infinite;
+            box-shadow: 0 0 10px rgba(255, 51, 153, 0.5);
         }
         
         @keyframes pillFall {
@@ -393,27 +639,80 @@
             }
         }
         
-        /* Responsive */
+        /* Scroll-to-top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 70px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 99;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .scroll-top.active {
+            opacity: 1;
+            bottom: 80px;
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Responsive Styles */
         @media (max-width: 768px) {
             .glitch {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
             
             .subtitle {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
             
-            .pill-image {
-                width: 200px;
-                height: 200px;
+            .pill-container {
+                width: 240px;
+                height: 100px;
             }
             
-            .about-title {
+            .pill-half {
+                width: 120px;
+                height: 50px;
+                margin-top: -25px;
+                border-radius: 25px;
+            }
+            
+            .pill-right {
+                left: 120px;
+            }
+            
+            .pill-line {
+                height: 50px;
+                left: 120px;
+                margin-top: -25px;
+            }
+            
+            .pill-text {
+                font-size: 1rem;
+            }
+            
+            .about-title, .chart-title {
                 font-size: 2.5rem;
             }
             
             .about-text {
                 font-size: 1.3rem;
+                padding: 1.5rem;
             }
             
             .fact-item h3 {
@@ -424,38 +723,56 @@
                 font-size: 1.2rem;
             }
             
-            .chart-title {
-                font-size: 2.5rem;
-            }
-            
             .social-links {
                 gap: 1rem;
             }
             
             .social-links a {
                 font-size: 1.5rem;
+                padding: 0.3rem 0.8rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Dark mode preference detection */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #131b29;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Pill Rain -->
+    <!-- Pill Rain Animation -->
     <div class="pill-rain" id="pillRain"></div>
     
-    <!-- Header -->
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop">↑</div>
+    
+    <!-- Header Section -->
     <header>
         <div class="glitch-container">
             <h1 class="glitch">$PHARMA</h1>
         </div>
         <p class="subtitle">Did you know big pharma kicks a million babies per year, and then takes their puppies and throws their ice cream on the ground?</p>
         
-        <div class="pill-image">
-            <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx="100" cy="50" rx="90" ry="40" fill="#ff3399" stroke="#0a0a0a" stroke-width="2" />
-                <line x1="50" y1="50" x2="150" y2="50" stroke="#0a0a0a" stroke-width="2" stroke-dasharray="5,5" />
-                <text x="65" y="40" fill="#0a0a0a" font-family="'VT323', monospace" font-size="14" font-weight="bold">$PHARMA</text>
-                <text x="65" y="65" fill="#0a0a0a" font-family="'VT323', monospace" font-size="10">F*UCK BIG PHARMA</text>
-            </svg>
+        <!-- 3D Pill Design -->
+        <div class="pill-container">
+            <div class="pill-3d">
+                <div class="pill-half pill-left">
+                    <div class="pill-text">$PHARMA</div>
+                    <div class="pill-shine"></div>
+                </div>
+                <div class="pill-half pill-right">
+                    <div class="pill-text">F*CK BIG PHARMA</div>
+                    <div class="pill-shine"></div>
+                </div>
+                <div class="pill-line"></div>
+            </div>
         </div>
         
         <div class="buttons">
@@ -464,22 +781,17 @@
         </div>
     </header>
     
-    <!-- About -->
+    <!-- About Section -->
     <section id="about">
         <h2 class="about-title">WHY $PHARMA?</h2>
         <div class="about-content">
             <div class="about-text">
-              <p>This is potentially the single greatest movement people have been rallying behind. This isn’t just a future 10m mc runner (higher). This is something the people relate to. Big pharma farms billions out of our pockets yearly. This is just a domino leading toward a sonic boom. During this process why don’t we PVE until we never have to worry about going into a financial spiral ever again whenever a health issue comes up. Let’s all come together and make a stand against this bullshit ass monopoly that’s stacked against us as a people.</p>
-                <!-- <p>$PHARMA is more than just a meme coin. It's a statement. A revolution against big pharma monopolies who profit from people's suffering.</p>
-                <br>
-                <p>While they charge $1000 for insulin, we're building a community-driven alternative to the corrupt system.</p>
-                <br>
-                <p>Our mission: Flip the script. Return power to the people. Make medicine accessible again.</p> -->
+                <p>This is potentially the single greatest movement people have been rallying behind. This isn't just a future 10m mc runner (higher). This is something the people relate to. Big pharma farms billions out of our pockets yearly. This is just a domino leading toward a sonic boom. During this process why don't we PVE until we never have to worry about going into a financial spiral ever again whenever a health issue comes up. Let's all come together and make a stand against this bullshit ass monopoly that's stacked against us as a people.</p>
             </div>
         </div>
     </section>
     
-    <!-- Big Pharma Facts -->
+    <!-- Big Pharma Facts Section -->
     <section id="facts">
         <div class="facts-container">
             <h2>BIG PHARMA FACTS</h2>
@@ -512,85 +824,220 @@
         </div>
     </section>
     
-    <!-- DEXScreener Chart Section -->
+    <!-- Chart Section -->
     <section id="chart" class="chart-section">
         <h2 class="chart-title">LIVE CHART</h2>
         <div id="dexscreener-embed">
             <iframe src="https://dexscreener.com/solana/3PffTrmfWe23GTNH6XNERGzzUkLDiPTejJpH9DK3R28u?embed=1&loadChartSettings=0&trades=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="social-links">
-            <a href="https://x.com/PharmaCoinSol">Twitter</a>
-            <a href="https://pump.fun/coin/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">PumpFun</a>
-            <a href="https://dexscreener.com/solana/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">DexScreener</a>
-            <a href="https://www.geckoterminal.com/solana/pools/3PffTrmfWe23GTNH6XNERGzzUkLDiPTejJpH9DK3R28u?utm_source=coingecko&utm_medium=referral&utm_campaign=searchresults">Geckoterminal</a>
-        </div>
-        <div class="logo-text-container">
-          <img src="pharmacoin logo.png" alt="$PHARMA" width="40px" />
-          <p class="copyright">© 2025 $PHARMA - F*ck Big Pharma. All rights reserved.
-            <br>
-            DISCLAIMER: None of the content on this website is financial advice. DYOR.
-          </p>
+          </div>
+      </section>
+      
+      <!-- Footer -->
+      <footer class="footer">
+          <div class="social-links">
+              <a href="https://x.com/PharmaCoinSol">Twitter</a>
+              <a href="https://pump.fun/coin/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">PumpFun</a>
+              <a href="https://dexscreener.com/solana/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">DexScreener</a>
+              <a href="https://www.geckoterminal.com/solana/pools/3PffTrmfWe23GTNH6XNERGzzUkLDiPTejJpH9DK3R28u?utm_source=coingecko&utm_medium=referral&utm_campaign=searchresults">Geckoterminal</a>
+          </div>
+          <div class="logo-text-container">
+              <div class="logo-container">
+                  <img src="pharmacoin_logo.png" alt="$PHARMA" width="40px" />
+                  <!-- Animated SVG Logo -->
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                      <!-- <ellipse cx="50" cy="50" rx="45" ry="22" fill="url(#pill-gradient)" stroke="#0a0a0a" stroke-width="1.5">
+                          <animate attributeName="ry" values="22;20;22" dur="3s" repeatCount="indefinite" />
+                      </ellipse>
+                      <line x1="25" y1="50" x2="75" y2="50" stroke="#0a0a0a" stroke-width="1.5" stroke-dasharray="3,3" />
+                      <text x="33" y="45" fill="#0a0a0a" font-family="'VT323', monospace" font-size="10" font-weight="bold">$PHARMA</text>
+                      <text x="27" y="58" fill="#0a0a0a" font-family="'VT323', monospace" font-size="7">F*CK BIG PHARMA</text> -->
+                      <defs>
+                          <linearGradient id="pill-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stop-color="#ff3399" />
+                              <stop offset="100%" stop-color="#ff80bf" />
+                              <animate attributeName="x1" values="0%;100%;0%" dur="5s" repeatCount="indefinite" />
+                              <animate attributeName="y1" values="0%;100%;0%" dur="7s" repeatCount="indefinite" />
+                          </linearGradient>
+                      </defs>
+                  </svg>
+              </div>
+              <div>
+                  <p class="copyright">© 2025 $PHARMA - F*ck Big Pharma. All rights reserved.</p>
+                  <p class="disclaimer">DISCLAIMER: None of the content on this website is financial advice. DYOR.</p>
+              </div>
+          </div>
+      </footer>
+      
+      <!-- Ticker -->
+      <div class="ticker-container">
+          <div class="ticker">
+              $PHARMA — FUCK BIG PHARMA — PHARMACOIN - FUCK BIG PHARMA - $PHARMA — FUCK BIG PHARMA — PHARMACOIN — FUCK BIG PHARMA — $PHARMA — FUCK BIG PHARMA — PHARMACOIN — FUCK BIG PHARMA — $PHARMA — FUCK BIG PHARMA — PHARMACOIN - FUCK BIG PHARMA
+          </div>
       </div>
-
-    </footer>
-    
-    <!-- Ticker -->
-    <div class="ticker-container">
-        <div class="ticker">
-            $PHARMA — FUCK BIG PHARMA — PHARMACOIN - FUCK BIG PHARMA - $PHARMA — FUCK BIG PHARMA — PHARMACOIN — FUCK BIG PHARMA — $PHARMA — FUCK BIG PHARMA — PHARMACOIN — FUCK BIG PHARMA — $PHARMA — FUCK BIG PHARMA — PHARMACOIN - FUCK BIG PHARMA
-        </div>
-    </div>
-    
-    <!-- Scripts -->
-    <script>
-        // Colorful Pill Rain
-        const pillRain = document.getElementById('pillRain');
-        const pillCount = 30;
-        const pillColors = [
-            '#ff3399', // pink
-            '#33ccff', // light blue
-            '#ffcc00', // yellow
-            '#ff6600', // orange
-            '#cc66ff', // purple
-            '#66ff66', // light green
-            '#ff0000', // red
-            '#0099ff', // blue
-            '#ff9900'  // amber
-        ];
-        
-        function createPills() {
-            for (let i = 0; i < pillCount; i++) {
-                const pill = document.createElement('div');
-                pill.classList.add('pill');
-                
-                // Random position, delay, and color
-                const left = Math.random() * 100;
-                const delay = Math.random() * 15;
-                const duration = 10 + Math.random() * 20;
-                const size = 10 + Math.random() * 30;
-                const colorIndex = Math.floor(Math.random() * pillColors.length);
-                
-                pill.style.left = left + 'vw';
-                pill.style.width = size + 'px';
-                pill.style.height = size / 2 + 'px';
-                pill.style.animationDelay = delay + 's';
-                pill.style.animationDuration = duration + 's';
-                pill.style.backgroundColor = pillColors[colorIndex];
-                
-                pillRain.appendChild(pill);
-            }
-        }
-        
-        createPills();
-        
-        // Responsive
-        window.addEventListener('resize', function() {
-            // Maintain responsiveness without the canvas
-        });
-    </script>
-</body>
-</html>
+      
+      <!-- Scripts -->
+      <script>
+          // Enhanced Pill Rain with different pill styles
+          document.addEventListener('DOMContentLoaded', function() {
+              const pillRain = document.getElementById('pillRain');
+              const pillCount = 30;
+              const pillColors = [
+                  '#ff3399', // pink
+                  '#ff66b2', // lighter pink
+                  '#ff0066', // darker pink
+                  '#33ccff', // light blue
+                  '#ffcc00', // yellow
+                  '#ff6600', // orange
+                  '#cc66ff', // purple
+                  '#66ff66', // light green
+                  '#ff0000', // red
+                  '#0099ff'  // blue
+              ];
+              
+              const pillShapes = [
+                  'capsule', // Capsule shape
+                  'round',   // Round pill
+                  'oval'     // Oval pill
+              ];
+              
+              function createPills() {
+                  for (let i = 0; i < pillCount; i++) {
+                      const pill = document.createElement('div');
+                      pill.classList.add('pill');
+                      
+                      // Random position, delay, color and shape
+                      const left = Math.random() * 100;
+                      const delay = Math.random() * 15;
+                      const duration = 10 + Math.random() * 20;
+                      const colorIndex = Math.floor(Math.random() * pillColors.length);
+                      const shapeType = pillShapes[Math.floor(Math.random() * pillShapes.length)];
+                      const rotation = Math.random() * 360;
+                      const size = 15 + Math.random() * 30;
+                      
+                      pill.style.left = left + 'vw';
+                      pill.style.animationDelay = delay + 's';
+                      pill.style.animationDuration = duration + 's';
+                      pill.style.backgroundColor = pillColors[colorIndex];
+                      pill.style.transform = `rotate(${rotation}deg)`;
+                      
+                      // Apply different pill shapes
+                      if (shapeType === 'capsule') {
+                          pill.style.width = size * 2.5 + 'px';
+                          pill.style.height = size + 'px';
+                          pill.style.borderRadius = '50px';
+                      } else if (shapeType === 'round') {
+                          pill.style.width = size + 'px';
+                          pill.style.height = size + 'px';
+                          pill.style.borderRadius = '50%';
+                      } else { // oval
+                          pill.style.width = size * 1.5 + 'px';
+                          pill.style.height = size + 'px';
+                          pill.style.borderRadius = '50%';
+                      }
+                      
+                      // Add a line to some pills
+                      if (Math.random() > 0.5 && shapeType !== 'round') {
+                          const line = document.createElement('div');
+                          line.style.position = 'absolute';
+                          line.style.top = '50%';
+                          line.style.left = '0';
+                          line.style.width = '100%';
+                          line.style.height = '2px';
+                          line.style.backgroundColor = 'rgba(10, 10, 10, 0.3)';
+                          line.style.transform = 'translateY(-50%)';
+                          pill.appendChild(line);
+                      }
+                      
+                      pillRain.appendChild(pill);
+                  }
+              }
+              
+              createPills();
+              
+              // Scroll to top button functionality
+              const scrollBtn = document.getElementById('scrollTop');
+              
+              window.addEventListener('scroll', function() {
+                  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                      scrollBtn.classList.add('active');
+                  } else {
+                      scrollBtn.classList.remove('active');
+                  }
+              });
+              
+              scrollBtn.addEventListener('click', function() {
+                  window.scrollTo({
+                      top: 0,
+                      behavior: 'smooth'
+                  });
+              });
+              
+              // Smooth scroll for anchor links
+              document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                  anchor.addEventListener('click', function(e) {
+                      e.preventDefault();
+                      const target = document.querySelector(this.getAttribute('href'));
+                      if (target) {
+                          window.scrollTo({
+                              top: target.offsetTop - 80, // Offset for header/padding
+                              behavior: 'smooth'
+                          });
+                      }
+                  });
+              });
+              
+              // Add subtle parallax effect to sections
+              const sections = document.querySelectorAll('section');
+              window.addEventListener('scroll', function() {
+                  const scrollPosition = window.scrollY;
+                  
+                  sections.forEach(section => {
+                      const sectionTop = section.offsetTop;
+                      const distance = sectionTop - scrollPosition;
+                      
+                      // Only apply parallax effect when section is in view
+                      if (distance < window.innerHeight && distance > -section.offsetHeight) {
+                          section.style.transform = `translateY(${distance * 0.05}px)`;
+                      }
+                  });
+              });
+              
+              // Make pill animations more interactive
+              const pillContainer = document.querySelector('.pill-container');
+              
+              pillContainer.addEventListener('mouseover', function() {
+                  document.querySelector('.pill-3d').style.animationPlayState = 'paused';
+                  document.querySelector('.pill-3d').style.transform = 'scale(1.1)';
+              });
+              
+              pillContainer.addEventListener('mouseout', function() {
+                  document.querySelector('.pill-3d').style.animationPlayState = 'running';
+                  document.querySelector('.pill-3d').style.transform = 'scale(1)';
+              });
+              
+              // Add a subtle pulse effect to the buttons
+              const buttons = document.querySelectorAll('.btn');
+              setInterval(() => {
+                  buttons.forEach(btn => {
+                      btn.classList.add('pulse');
+                      setTimeout(() => {
+                          btn.classList.remove('pulse');
+                      }, 1000);
+                  });
+              }, 3000);
+              
+              // Preload background resources for smoother experience
+              function preloadImages() {
+                  // Preload any additional images you might have
+                  const images = [];
+                  for (let i = 0; i < images.length; i++) {
+                      const img = new Image();
+                      img.src = images[i];
+                  }
+              }
+              
+              preloadImages();
+          });
+      </script>
+  </body>
+  </html>
