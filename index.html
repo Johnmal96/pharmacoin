@@ -211,27 +211,50 @@
         #dexscreener-embed {
             position: relative;
             width: 100%;
-            padding-bottom: 125%;
+            height: 0;
             margin: 2rem 0;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
             border: 2px solid #ff3399;
         }
-        
-        @media(min-width: 1400px) {
-            #dexscreener-embed {
-                /* padding-bottom: 65%; */
-                padding-bottom: 56.25%;
-            }
+
+        /* Base padding for mobile devices (iPhone) */
+        #dexscreener-embed {
+            padding-bottom: 150%; /* Taller aspect ratio for small screens */
         }
         
-        @media(min-width: 1024px) and (max-width: 1399px) {
+       /* Tablet size adjustments */
+        @media (min-width: 768px) {
             #dexscreener-embed {
-                padding-bottom: 35%;  /* Adjust vertical aspect ratio for MacBook */
+                padding-bottom: 100%; /* More balanced for medium screens */
             }
         }
 
+        /* Laptops & smaller desktops (MacBook, etc) */
+        @media (min-width: 1024px) {
+            #dexscreener-embed {
+                padding-bottom: 75%; /* Wider aspect ratio */
+            }
+        }
+
+        /* Medium desktops (21-24 inch) */
+        @media (min-width: 1400px) {
+            #dexscreener-embed {
+                padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            }
+        }
+
+        /* Large displays (28-32 inch) */
+        @media (min-width: 1800px) {
+            #dexscreener-embed {
+                padding-bottom: 50%; /* Even wider aspect ratio for large screens */
+                max-width: 1600px; /* Prevent excessive stretching */
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        
         #dexscreener-embed iframe {
             position: absolute;
             width: 100%;
