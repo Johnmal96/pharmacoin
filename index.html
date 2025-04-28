@@ -364,26 +364,6 @@
             margin: 1rem 0;
             box-shadow: 0 0 30px rgba(0, 255, 102, 0.2);
         }
-
-        @media (max-width: 768px) {
-            /* On mobile, stretch the facts-container to take full width */
-            .facts-container {
-                width: 100%;
-                margin: 0 auto; /* Ensure it is centered */
-                padding: 1.5rem; /* Adjust padding for better spacing */
-                border-radius: 10px; /* Optional: To make it look more rounded on mobile */
-            }
-                /* Make fact items inside the container stack vertically */
-                .facts-grid {
-                grid-template-columns: 1fr;
-            }
-
-            /* Adjust padding and margin inside fact items for mobile */
-            .fact-item {
-                padding: 1rem;
-                margin-bottom: 1rem;
-            }
-        }
         
         .facts-container h2 {
             font-size: 3rem;
@@ -947,7 +927,7 @@
             <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
         </div>
     </section>
-
+    
     <!-- About Section -->
     <section id="about">
         <h2 class="about-title">WHY $PHARMA?</h2>
