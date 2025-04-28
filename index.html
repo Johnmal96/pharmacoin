@@ -161,13 +161,22 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+
+        /* Adjust the grid for smaller screens */
+        @media (max-width: 768px) {
+            .facts-grid {
+                grid-template-columns: 1fr; /* Ensure each fact item takes up full width */
+                gap: 1rem; /* Reduce gap on mobile */
+            }
+        }
+
         .fact-item {
             text-align: center;
             padding: 1.5rem;
             background-color: rgba(0, 255, 102, 0.1);
             border-radius: 10px;
             transition: all 0.3s;
+            box-sizing: border-box;
         }
         
         .fact-item:hover {
