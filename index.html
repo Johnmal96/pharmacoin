@@ -78,9 +78,9 @@
         }
 
          .header-logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 1rem;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
             position: relative;
             filter: drop-shadow(0 0 10px rgba(255, 51, 153, 0.7));
             animation: pulse-glow 3s ease-in-out infinite;
@@ -158,7 +158,7 @@
         
         /* Realistic 3D Pill */
         .pill-container {
-            margin: 3rem 0;
+            margin: 2rem 0;
             position: relative;
             width: 300px;
             height: 120px;
@@ -361,7 +361,7 @@
             padding: 2.5rem;
             border-radius: 20px;
             border: 2px solid var(--primary-color);
-            margin: 5rem 0;
+            margin: 1rem 0;
             box-shadow: 0 0 30px rgba(0, 255, 102, 0.2);
         }
         
@@ -599,11 +599,9 @@
             margin-top: 2rem;
         }
         
-        .logo-container img {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-            margin-bottom: 5px;
+        .logo-container {
+            width: 50px;
+            height: 50px;
         }
         
         .copyright {
@@ -804,9 +802,6 @@
     
     <!-- Header Section -->
     <header>
-        <div class="header-logo">
-            <img src="pharmacoin_logo.png" alt="$PHARMA Logo">
-        </div>
         <div class="glitch-container">
             <h1 class="glitch">$PHARMA</h1>
         </div>
@@ -844,7 +839,9 @@
             </div>
         </div>
     </section>
-    
+    <div class="header-logo">
+        <img src="pharmacoin_logo.png" alt="$PHARMA Logo">
+    </div>
     <!-- Big Pharma Facts Section -->
     <section id="facts">
         <div class="facts-container">
@@ -888,33 +885,39 @@
       
       <!-- Footer -->
       <footer class="footer">
-        <div class="social-links">
-            <a href="https://x.com/PharmaCoinSol">Twitter</a>
-            <a href="https://pump.fun/coin/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">PumpFun</a>
-            <a href="https://dexscreener.com/solana/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">DexScreener</a>
-            <a href="https://www.geckoterminal.com/solana/pools/3PffTrmfWe23GTNH6XNERGzzUkLDiPTejJpH9DK3R28u?utm_source=coingecko&utm_medium=referral&utm_campaign=searchresults">Geckoterminal</a>
-        </div>
-        <div class="logo-text-container">
-            <div class="logo-container">
-                <img src="pharmacoin_logo.png" alt="$PHARMA" />
-                <!-- SVG animation can remain -->
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="pill-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#ff3399" />
-                            <stop offset="100%" stop-color="#ff80bf" />
-                            <animate attributeName="x1" values="0%;100%;0%" dur="5s" repeatCount="indefinite" />
-                            <animate attributeName="y1" values="0%;100%;0%" dur="7s" repeatCount="indefinite" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-            </div>
-            <div>
-                <p class="copyright">© 2025 $PHARMA - F*ck Big Pharma. All rights reserved.</p>
-                <p class="disclaimer">DISCLAIMER: None of the content on this website is financial advice. DYOR.</p>
-            </div>
-        </div>
-    </footer>
+          <div class="social-links">
+              <a href="https://x.com/PharmaCoinSol">Twitter</a>
+              <a href="https://pump.fun/coin/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">PumpFun</a>
+              <a href="https://dexscreener.com/solana/HtrvP4fG9KiFqFeu4f32RuZiwG3nmYwPkPZ61nAbpump">DexScreener</a>
+              <a href="https://www.geckoterminal.com/solana/pools/3PffTrmfWe23GTNH6XNERGzzUkLDiPTejJpH9DK3R28u?utm_source=coingecko&utm_medium=referral&utm_campaign=searchresults">Geckoterminal</a>
+          </div>
+          <div class="logo-text-container">
+              <div class="logo-container">
+                  <img src="pharmacoin_logo.png" alt="$PHARMA" width="40px" />
+                  <!-- Animated SVG Logo -->
+                  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                      <!-- <ellipse cx="50" cy="50" rx="45" ry="22" fill="url(#pill-gradient)" stroke="#0a0a0a" stroke-width="1.5">
+                          <animate attributeName="ry" values="22;20;22" dur="3s" repeatCount="indefinite" />
+                      </ellipse>
+                      <line x1="25" y1="50" x2="75" y2="50" stroke="#0a0a0a" stroke-width="1.5" stroke-dasharray="3,3" />
+                      <text x="33" y="45" fill="#0a0a0a" font-family="'VT323', monospace" font-size="10" font-weight="bold">$PHARMA</text>
+                      <text x="27" y="58" fill="#0a0a0a" font-family="'VT323', monospace" font-size="7">F*CK BIG PHARMA</text> -->
+                      <defs>
+                          <linearGradient id="pill-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                              <stop offset="0%" stop-color="#ff3399" />
+                              <stop offset="100%" stop-color="#ff80bf" />
+                              <animate attributeName="x1" values="0%;100%;0%" dur="5s" repeatCount="indefinite" />
+                              <animate attributeName="y1" values="0%;100%;0%" dur="7s" repeatCount="indefinite" />
+                          </linearGradient>
+                      </defs>
+                  </svg>
+              </div>
+              <div>
+                  <p class="copyright">© 2025 $PHARMA - F*ck Big Pharma. All rights reserved.</p>
+                  <p class="disclaimer">DISCLAIMER: None of the content on this website is financial advice. DYOR.</p>
+              </div>
+          </div>
+      </footer>
       
       <!-- Ticker -->
       <div class="ticker-container">
