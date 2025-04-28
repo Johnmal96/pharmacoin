@@ -225,13 +225,13 @@
                 padding-bottom: 56.25%;
             }
         }
-
-        @media(max-width: 768px) {
+        
+        @media(min-width: 1024px) and (max-width: 1399px) {
             #dexscreener-embed {
-                padding-bottom: 75%;
+                padding-bottom: 75%;  /* Adjust vertical aspect ratio for MacBook */
             }
         }
-        
+
         #dexscreener-embed iframe {
             position: absolute;
             width: 100%;
