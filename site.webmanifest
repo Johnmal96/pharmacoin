@@ -2,7 +2,7 @@
     "name":"$PHARMA - F*CK BIG PHARMA",
     "short_name":"PHARMACOIN",
     "description": "OUR HEALTH. THEIR WEALTH. NO MORE.",
-    "start_url": "https://buypharmacoin.xyz/",
+    "start_url": "https://buypharmacoin.xyz",
     "icons":[
         {
             "src":"/android-chrome-192x192.png",
