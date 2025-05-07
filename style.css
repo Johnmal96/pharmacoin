@@ -882,7 +882,7 @@ section {
 /* Responsive Styles */
 @media (max-width: 768px) {
     .glitch {
-        font-size: 3rem;
+        font-size: 3.5rem;
     }
     
     .subtitle {
@@ -957,7 +957,7 @@ section {
 
 @media (max-width: 480px) {
     .glitch {
-        font-size: 2.5rem;
+        font-size: 3rem;
     }
     
     .subtitle {
